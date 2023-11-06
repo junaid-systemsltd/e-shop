@@ -22,10 +22,9 @@ export class UsersService {
       throw new BadRequestException("account with this email is already exist!")
 
 
-    const user = (await this.userModel.create(createUserDto))?.toObject();
+    const user = await this.userModel.create(createUserDto);
 
-    // Removed 'password' & '__v' field
-    return _.omit(user, ['password', '__v']);
+    return user
   }
 
   async findAll() {
