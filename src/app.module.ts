@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ProductsModule } from './modules/products/products.module';
 
 @Module({
   imports: [
@@ -10,9 +11,15 @@ import { MongooseModule } from '@nestjs/mongoose';
       envFilePath: '.env.development',
       isGlobal: true
     }),
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get('MONGO_URI')
+      })
+    }),
     AuthModule,
-    UsersModule
+    UsersModule,
+    ProductsModule
   ],
   controllers: [],
   providers: [],

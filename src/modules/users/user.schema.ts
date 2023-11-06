@@ -6,7 +6,7 @@ import * as bcrypt from "bcrypt"
 @Schema({ timestamps: true })
 export class User {
     @Prop()
-    name: string
+    name: String
 
     @Prop({ required: true })
     email: string
