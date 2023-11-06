@@ -7,14 +7,16 @@ import { User } from '../users/user.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import * as _ from "lodash"
+import { ConfigService } from '@nestjs/config';
 
 
 @Injectable()
 export class AuthService {
     constructor(
         private jwtService: JwtService,
-        @InjectModel(User.name) private userModel: Model<User>,
         private userService: UsersService,
+        private configService: ConfigService,
+        @InjectModel(User.name) private userModel: Model<User>,
     ) { }
 
 
@@ -23,7 +25,7 @@ export class AuthService {
     }
 
     async validateToken(token: string) {
-        return await this.jwtService.verify(token);
+        return await this.jwtService.verifyAsync(token);
     }
 
     async login(loginDto: LoginDto) {
@@ -37,7 +39,12 @@ export class AuthService {
 
         const payload = { id: user.id, email: user.email, name: user.name, role: user.role };
 
-        const token = await this.jwtService.signAsync(payload)
+        const token = await this.jwtService.signAsync(payload,
+            {
+                secret: this.configService.get('JWT_SECRET'),
+                expiresIn: '1h'
+            }
+        )
 
         return { accessToken: token }
     }
