@@ -1,6 +1,8 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+// Libs
 import mongoose from "mongoose";
-import { User } from "src/modules/users/user.schema";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+// Modules
+import { User } from "@users/user.schema";
 
 
 @Schema({ timestamps: true })

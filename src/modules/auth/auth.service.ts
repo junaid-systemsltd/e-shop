@@ -1,13 +1,15 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { LoginDto } from './dto/login.dto';
-import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
-import { CreateUserDto } from '../users/dto/create-user.dto';
-import { User } from '../users/user.schema';
-import { Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
+// Libs
 import * as _ from "lodash"
+import { Model } from 'mongoose';
+import { JwtService } from '@nestjs/jwt';
+import { InjectModel } from '@nestjs/mongoose';
 import { ConfigService } from '@nestjs/config';
+import { BadRequestException, Injectable } from '@nestjs/common';
+// Modules
+import { User } from '@users/user.schema';
+import { LoginDto } from '@auth/dto/login.dto';
+import { UsersService } from '@users/users.service';
+import { CreateUserDto } from '@users/dto/create-user.dto';
 
 
 @Injectable()
@@ -33,11 +35,11 @@ export class AuthService {
         const user = await this.userModel.findOne({ email }).select('+password')
 
         // @ts-ignore
-        if (user && !(await user?.matchPassword(password))) {
+        if (!user || !(await user?.matchPassword(password))) {
             throw new BadRequestException("invalid credentials")
         }
 
-        const payload = { id: user.id, email: user.email, name: user.name, role: user.role };
+        const payload = { id: user._id, email: user.email, name: user.name, role: user.role };
 
         const token = await this.jwtService.signAsync(payload,
             {

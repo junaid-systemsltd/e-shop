@@ -1,7 +1,9 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Roles } from "./user-roles.enum";
-import { hashPassword } from "src/helpers/password.helper";
+// Libs
 import * as bcrypt from "bcrypt"
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+// Modules
+import { Roles } from "@users/user-roles.enum";
+import { hashPassword } from "@helpers/password.helper";
 
 @Schema({ timestamps: true })
 export class User {

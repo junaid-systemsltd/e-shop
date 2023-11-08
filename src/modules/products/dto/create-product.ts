@@ -1,5 +1,7 @@
-import { IsEnum, IsMongoId, IsNotEmpty, IsOptional, MaxLength } from "class-validator";
-import { ProductBrand, ProductCategory } from "../products.enum";
+// Libs
+import { IsEnum, IsMongoId, IsOptional, MaxLength } from "class-validator";
+// Modules
+import { ProductBrand, ProductCategory } from "@products/products.enum";
 
 export class CreateProductDto {
     @MaxLength(30)

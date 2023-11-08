@@ -1,10 +1,12 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { User } from './user.schema';
-import { Model } from 'mongoose';
+// Libs
 import * as _ from "lodash"
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+// Modules
+import { User } from '@users/user.schema';
+import { CreateUserDto } from '@users/dto/create-user.dto';
+import { UpdateUserDto } from '@users/dto/update-user.dto';
 
 
 @Injectable()

@@ -1,8 +1,10 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+// Libs
 import mongoose from "mongoose";
-import { User } from "../users/user.schema";
-import { Product } from "../products/schemas/product.schema";
-import { PaymentMethod, PaymentStatus } from "./order.enum";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+// Modules
+import { User } from "@users/user.schema";
+import { Product } from "@products/schemas/product.schema";
+import { PaymentMethod, PaymentStatus } from "@order/order.enum";
 
 
 

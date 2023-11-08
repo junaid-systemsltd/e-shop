@@ -1,21 +1,22 @@
-import { Injectable, Logger, Module } from "@nestjs/common";
+// Libs
 import { NestFactory } from "@nestjs/core";
-import { InjectConnection, InjectModel, MongooseModule } from "@nestjs/mongoose";
-import { User, UserSchema } from "./modules/users/user.schema";
-import { Product, ProductSchema } from "./modules/products/schemas/product.schema";
 import { Connection, Model } from "mongoose";
-import users from "./data/users";
-import products from "./data/products";
+import { Injectable, Logger, Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { InjectConnection, InjectModel, MongooseModule } from "@nestjs/mongoose";
+// Modules
+import users from "@/data/users";
+import products from "@/data/products";
+import { User, UserSchema } from "@users/user.schema";
+import { Product, ProductSchema } from "@products/schemas/product.schema";
 
 
 @Injectable()
 class SeederService {
     constructor(
+        @InjectConnection() private connection: Connection,
         @InjectModel(User.name) private userModel: Model<User>,
         @InjectModel(Product.name) private productModel: Model<Product>,
-        @InjectConnection() private connection: Connection,
-
     ) { }
 
     async seed() {

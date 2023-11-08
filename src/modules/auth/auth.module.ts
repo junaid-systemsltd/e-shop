@@ -1,11 +1,13 @@
+// Libs
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { User, UserSchema } from '../users/user.schema';
-import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './jwt.strategy';
-import { UsersModule } from '../users/users.module';
+import { MongooseModule } from '@nestjs/mongoose';
+// Modules
+import { AuthService } from '@auth/auth.service';
+import { JwtStrategy } from '@auth/jwt.strategy';
+import { UsersModule } from '@users/users.module';
+import { User, UserSchema } from '@users/user.schema';
+import { AuthController } from '@auth/auth.controller';
 
 @Module({
   imports: [

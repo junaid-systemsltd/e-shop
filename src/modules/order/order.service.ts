@@ -1,21 +1,18 @@
-import { Body, Get, Injectable, NotFoundException, Param } from '@nestjs/common';
-import { CreateOrderDto } from './dto/create-order.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { Order } from './order.schema';
+// Libs
 import { Model } from 'mongoose';
-import { UpdateOrderToPaidDto } from './dto/update-order-topaid.dto';
-import { ParseObjectIdPipe } from 'src/common/pipes/parse-object-id.pipe';
+import { InjectModel } from '@nestjs/mongoose';
+import { Injectable, NotFoundException } from '@nestjs/common';
+// Modules
+import { Order } from '@order/order.schema';
+import { CreateOrderDto } from '@order/dto/create-order.dto';
+import { UpdateOrderToPaidDto } from '@order/dto/update-order-topaid.dto';
 
 @Injectable()
 export class OrderService {
-    constructor(
-        @InjectModel(Order.name) private orderModel: Model<Order>
-    ) { }
+    constructor(@InjectModel(Order.name) private orderModel: Model<Order>) { }
 
     async create(createOrderDto: CreateOrderDto) {
-        const order = await this.orderModel.create(createOrderDto)
-
-        return order
+        return await this.orderModel.create(createOrderDto)
     }
 
     async getOrderById(id: string) {
@@ -28,9 +25,7 @@ export class OrderService {
     }
 
     async GetMyOrders(userId: string) {
-        const orders = await this.orderModel.find({ user: userId })
-
-        return orders;
+        return await this.orderModel.find({ user: userId })
     }
 
     async updateOrderToPaid(orderId: string, updateOrderToPaidDto: UpdateOrderToPaidDto) {
@@ -43,9 +38,7 @@ export class OrderService {
         order.paidAt = new Date();
         order.paymentResult = { ...updateOrderToPaidDto, updateTime: new Date() }
 
-        const updatedOrder = await order.save()
-
-        return updatedOrder
+        return await order.save()
     }
 
     async getAllOrders() {

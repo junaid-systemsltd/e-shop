@@ -1,5 +1,7 @@
+// Libs
 import { IsEmail, IsOptional, Length } from "class-validator";
-import { Roles } from "../user-roles.enum";
+// Modules
+import { Roles } from "@users/user-roles.enum";
 
 export class CreateUserDto {
     @Length(3, 15)

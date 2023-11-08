@@ -1,7 +1,9 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { ProductBrand, ProductCategory } from "../products.enum";
+// Libs
 import mongoose from "mongoose";
-import { Review } from "./review.schema";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+// Modules
+import { Review } from "@products/schemas/review.schema";
+import { ProductBrand, ProductCategory } from "@products/products.enum";
 
 
 

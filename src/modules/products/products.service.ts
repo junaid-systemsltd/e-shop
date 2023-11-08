@@ -1,21 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Product } from './schemas/product.schema';
+// Libs
 import { Model } from 'mongoose';
-import { CreateProductDto } from './dto/create-product';
-import { ProductFilterQueryDto } from './dto/product-filter-query.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Injectable, NotFoundException } from '@nestjs/common';
+// Modules
+import { Product } from '@products/schemas/product.schema';
+import { CreateProductDto } from '@products/dto/create-product';
+import { UpdateProductDto } from '@products/dto/update-product.dto';
+import { ProductFilterQueryDto } from '@products/dto/product-filter-query.dto';
 
 @Injectable()
 export class ProductsService {
-    constructor(
-        @InjectModel(Product.name) private productModel: Model<Product>
-    ) { }
+    constructor(@InjectModel(Product.name) private productModel: Model<Product>) { }
 
     async create(createProductDto: CreateProductDto) {
-        const product = await this.productModel.create(createProductDto)
-
-        return product
+        return await this.productModel.create(createProductDto)
     }
 
 

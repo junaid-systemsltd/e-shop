@@ -1,10 +1,12 @@
+// Libs
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthModule } from './modules/auth/auth.module';
-import { UsersModule } from './modules/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductsModule } from './modules/products/products.module';
-import { OrderModule } from './modules/order/order.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+// Modules
+import { AuthModule } from '@auth/auth.module';
+import { UsersModule } from '@users/users.module';
+import { OrderModule } from '@order/order.module';
+import { ProductsModule } from '@products/products.module';
 
 @Module({
   imports: [
