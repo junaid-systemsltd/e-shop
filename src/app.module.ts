@@ -4,6 +4,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProductsModule } from './modules/products/products.module';
+import { OrderModule } from './modules/order/order.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { ProductsModule } from './modules/products/products.module';
     }),
     AuthModule,
     UsersModule,
-    ProductsModule
+    ProductsModule,
+    OrderModule
   ],
   controllers: [],
   providers: [],
